@@ -143,7 +143,7 @@ contract MetaCheems is Context, IERC20, Ownable {
         inSwapAndLiquify = false;
     }
 
-    constructor(string memory Name, string memory Symbol) {
+    constructor(string memory Name, string memory Symbol, address marketingWallet, address buybackWallet) {
         _name = Name;
         _symbol = Symbol;
 
@@ -155,8 +155,8 @@ contract MetaCheems is Context, IERC20, Ownable {
         emit SetAutomatedMarketMakerPair(uniswapPair, true);
         UniswapV2Router = _UniswapV2Router;
         _rOwned[owner()] = _rTotal;
-        buybackAddress = payable(msg.sender);
-        marketingAddress = payable(msg.sender);
+        buybackAddress = payable(marketingWallet);
+        marketingAddress = payable(buybackWallet);
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[buybackAddress] = true;
         _isExcludedFromFee[marketingAddress] = true;
