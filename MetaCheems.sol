@@ -70,8 +70,8 @@ contract BoggedCheems is Context, IERC20, Ownable {
 
     mapping(address => bool) public isAutomatedMarketMakerPair;
 
-    string private constant _name = "Bogged Cheems";
-    string private constant _symbol = "BOGCHEEMS";
+    string private _name = "Bogged Cheems";
+    string private _symbol = "BOGCHEEMS";
 
     bool private inSwapAndLiquify;
 
@@ -143,7 +143,10 @@ contract BoggedCheems is Context, IERC20, Ownable {
         inSwapAndLiquify = false;
     }
 
-    constructor() {
+    constructor(string memory Name, string memory Symbol) {
+        _name = Name;
+        _symbol = Symbol;
+        
         IUniswapV2Router02 _UniswapV2Router = IUniswapV2Router02(
             0x10ED43C718714eb63d5aA57B78B54704E256024E
         );
@@ -170,11 +173,11 @@ contract BoggedCheems is Context, IERC20, Ownable {
     }
 
     //std ERC20:
-    function name() public pure returns (string memory) {
+    function name() public view returns (string memory) {
         return _name;
     }
 
-    function symbol() public pure returns (string memory) {
+    function symbol() public view returns (string memory) {
         return _symbol;
     }
 
